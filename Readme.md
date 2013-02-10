@@ -1,16 +1,20 @@
-### Author: Alexander Luksidadi
-### Tutorial URL: http://blog.luksidadi.com/mysql-nodejs-socketio-tutorial/
+### Author: Ahsanuzzaman Khan
 
 Description:
-How to call mysql query from Nodejs / SocketIO
+How to call mysql query from Nodejs / SocketIO.
+This is a basic employee management project to understand nodejs. This project shows us how to add, edit & show a lists.
 
 Tags: nodejs, socketio, mysql
 
 ### installation:
 - install nodejs (nodejs.org)
 - install npm (npmjs.org)
-- install socketio (socket.io)
-- install node-mysql (https://github.com/felixge/node-mysql)
+- install socketio (socket.io) [command: npm install socket.io]
+- install node-mysql [command: npm install mysql]
+
+
+### Assuming that you've already mysql database named mynode_db which has one table named employees. You can find this from 
+db_helper.js file.
 
 ### run this command in your terminal:
 ```
@@ -19,8 +23,5 @@ Tags: nodejs, socketio, mysql
 
 ### open in your browser:
 ```
-  http://localhost:3000/
+  http://localhost:1337/
 ```
-
-visit my blog: 
-http://blog.luksidadi.com
