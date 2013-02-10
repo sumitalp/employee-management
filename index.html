@@ -1,0 +1,86 @@
+<!DOCTYPE html>          
+<html>                           
+  <head>                                            
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Node JS</title>
+    <style type="text/css">                    
+      html , body {
+        font: normal 0.9em arial , helvetica;
+      }                     
+    </style> 
+    <script src="http://localhost:1337/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript"> 
+	var socket  = io.connect('http://localhost:1337');
+    $(document).ready(function() {
+      
+        
+      $('#save').click(function() {
+        if ($('#employee_name').val() == '' || $('#employee_salary').val() == '') {
+          return alert('Please enter both name/salary!');
+        }
+		
+		if($('#employee_id').val() == ''){
+          var data = {
+            name: $('#employee_name').val(),
+            salary: $('#employee_salary').val()
+          };
+          socket.emit('add employee', data);
+		} else {
+		  var data = {
+		    id: $('#employee_id').val(),
+			name: $('#employee_name').val(),
+			salary: $('#employee_salary').val()
+		  }	
+		  socket.emit('update employee', data);
+		}
+        $('#employee_name').val('');
+        $('#employee_salary').val('');
+      });
+
+      socket.on('populate', function(data) {
+        var out = "";
+		if(data.length > 0){
+		//console.log(data);
+          $.each(data, function(i, obj) {
+            out += "<li><a href='javascript:void(0);' onclick='return editEmp("+obj.id+");'>"+obj.name+"</a></li>";
+          });
+		}
+        $('#employees').html(out);
+      });
+	  
+	  socket.on('get_employee', function(data){
+	    console.log(data);
+		$('#employee_name').val(data[0].name);
+        $('#employee_salary').val(data[0].salary);
+		$('#employee_id').val(data[0].id);
+	  });
+    });
+	
+	function editEmp($id) {
+		
+		var data = {
+		  id: $id
+		};
+		socket.emit('get employee by id', data);
+		//alert($id);
+		//$('#employee_name').val(eEmp.name);
+        //$('#employee_salary').val(eEmp.salary);
+		console.log('click employee');
+		
+	    return false;
+	}
+    </script>  
+  </head>                                                                                                                              
+  <body>
+    <b>Create new employee</b>
+	<input type='hidden' id='employee_id' value='' />
+    <div>Name: <input type='text' id='employee_name' value=''></div>
+    <div>Salary: <input type='text' id='employee_salary' value=''></div>
+    <div><input type='button' value='Save' id='save'></div>
+    
+    <br> 
+    <b>List of Employees:</b>
+    <ul id='employees'></ul>
+  </body>                                                                                                                              
+</html> 
