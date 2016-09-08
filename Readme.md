@@ -1,10 +1,10 @@
 ### Author: Ahsanuzzaman Khan
 
 Description:
-How to call mysql query from Nodejs / SocketIO.
-This is a basic employee management project to understand nodejs. This project shows us how to add, edit & show a lists.
+How to call mysql query from Node.js / SocketIO.
+This is a basic employee management project to understand node.js. This project shows us how to add, edit & show a lists.
 
-Tags: nodejs, socketio, mysql
+Tags: node.js, socket.io, mysql
 
 ### installation:
 - install nodejs (nodejs.org)
